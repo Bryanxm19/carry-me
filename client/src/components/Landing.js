@@ -1,9 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const H1 = styled.h1`
+  color: red;
+`;
 
 const Landing = () => {
   return (
-    <div className="container">
-      <h1>Landing</h1>
+    <div>
+      <H1>Landing</H1>
     </div>
   );
 }
