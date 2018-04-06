@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-const Landing = <h2>Landing</h2>
+import Landing from './Landing';
 
 const App = () => {
   return (
-    <div>
+    <div className="container">
       <BrowserRouter>
         <div>
           <Route exact path="/" component={Landing} />
