@@ -5,7 +5,7 @@ import Landing from './Landing';
 
 const App = () => {
   return (
-    <div className="container">
+    <div>
       <BrowserRouter>
         <div>
           <Route exact path="/" component={Landing} />
