@@ -5,6 +5,8 @@ import * as actions from '../actions';
 
 import Landing from './Landing';
 
+const Index = () => <h2>Index</h2>
+
 class App extends Component {
 
   componentDidMount() {
@@ -17,6 +19,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/home" component={Index} />
           </div>
         </BrowserRouter>
       </div>
