@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import Header from './Header';
+
 class Dashboard extends Component {
 
   checkAuth() {
@@ -11,8 +13,15 @@ class Dashboard extends Component {
       case false:
         return <Redirect to='/'/>;
       default:
-        return <h1>Dashboard</h1>
+        return this.renderDashboardContent()
     }
+  }
+
+  renderDashboardContent() {
+    return ([
+      <Header key="1" />,
+      <h1 key="2">Dashboard</h1>
+    ]);
   }
 
   render() {
