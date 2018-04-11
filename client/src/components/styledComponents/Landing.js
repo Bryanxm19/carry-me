@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const textStyles = css`
+const textStyles = css`
   color: white;
   text-shadow: 1px 1px #000;
 `

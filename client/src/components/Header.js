@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavItem, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, FormGroup, FormControl, Button } from 'react-bootstrap';
+
+import { NAVITEM } from './styledComponents/Header';
 
 const Header = () => {
   return (
@@ -19,12 +21,12 @@ const Header = () => {
           <Button type="submit" style={{ marginLeft: '10px' }}>Search</Button>
         </Navbar.Form>
         <Nav pullRight>
-          <NavItem eventKey={1}>
+          <NAVITEM eventKey={1} className="foo">
             Settings
-          </NavItem>
-          <NavItem eventKey={2} href="/api/logout">
+          </NAVITEM>
+          <NAVITEM eventKey={2} href="/api/logout">
             Log Out
-          </NavItem>
+          </NAVITEM>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
