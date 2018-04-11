@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import Landing from './Landing';
-
-const Index = () => <h2>Index</h2>
+import Dashboard from './Dashboard';
 
 class App extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchUser();
   }
 
@@ -19,7 +18,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Route exact path="/" component={Landing} />
-            <Route exact path="/home" component={Index} />
+            <Route exact path="/dashboard" component={Dashboard} />
           </div>
         </BrowserRouter>
       </div>
