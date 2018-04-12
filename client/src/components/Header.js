@@ -1,7 +1,14 @@
 import React from 'react';
-import { Navbar, Nav, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
+import { Navbar, Nav, Glyphicon } from 'react-bootstrap';
 
-import { NAVITEM, NAVBAR, LINK, FORM, BUTTON } from './styledComponents/Header';
+import 
+{ 
+  NAVITEM,
+  NAVBAR,
+  LINK,
+  FORM
+} from './styledComponents/Header';
+import Search from './Header/Search';
 
 const Header = () => {
   return (
@@ -14,10 +21,7 @@ const Header = () => {
       </Navbar.Header>
       <Navbar.Collapse>
         <FORM pullLeft>
-          <FormGroup>
-            <FormControl type="text" placeholder="Search" />
-          </FormGroup>
-          <BUTTON type="submit"><Glyphicon glyph="search" /></BUTTON>
+          <Search />
         </FORM>
         <Nav pullRight>
           <NAVITEM eventKey={1}>
