@@ -7,8 +7,8 @@ import
   NAVBAR,
   LINK,
   FORM
-} from './styledComponents/Header';
-import Search from './Header/Search';
+} from '../styledComponents/Header';
+import Search from './Search';
 
 const Header = () => {
   return (

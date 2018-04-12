@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Header from './Header';
+import Header from './Header/Header';
 
 class Dashboard extends Component {
 
