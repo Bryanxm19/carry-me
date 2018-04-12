@@ -16,6 +16,7 @@ export const NAVBAR = styled(Navbar)`
   border: none;
   border-radius: 0;
   background-color: #14282d;
+  margin-bottom: 0;
 `
 
 export const LINK = styled(Link)`

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Glyphicon } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import 
 { 
@@ -12,7 +13,7 @@ import Search from './Search';
 
 const Header = () => {
   return (
-    <NAVBAR collapseOnSelect>
+    <NAVBAR collapseOnSelect fixedTop>
       <Navbar.Header>
         <Navbar.Brand>
           <LINK to="/dashboard">Home</LINK>
@@ -24,13 +25,15 @@ const Header = () => {
           <Search />
         </FORM>
         <Nav pullRight>
-          <NAVITEM eventKey={1}>
+          <NAVITEM>
             <Glyphicon glyph="envelope" />
           </NAVITEM>
-          <NAVITEM eventKey={2}>
-            Settings
-          </NAVITEM>
-          <NAVITEM eventKey={3} href="/api/logout">
+          <LinkContainer to="/settings" activeClassName="">
+            <NAVITEM href="/settings">
+              Settings
+            </NAVITEM>
+          </LinkContainer>
+          <NAVITEM href="/api/logout">
             Log Out
           </NAVITEM>
         </Nav>
