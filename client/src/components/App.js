@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 import Landing from './Landing';
 import Dashboard from './Dashboard';
-import Settings from './Settings/Settings';
+import Settings from './settings/Settings';
 
 class App extends Component {
 
