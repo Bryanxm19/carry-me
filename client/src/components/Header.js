@@ -1,35 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
-import { NAVITEM } from './styledComponents/Header';
+import { NAVITEM, NAVBAR, LINK, FORM, BUTTON } from './styledComponents/Header';
 
 const Header = () => {
   return (
-    <Navbar collapseOnSelect style={{ border: 'none', borderRadius: 0, backgroundColor: '#14282d' }}>
+    <NAVBAR collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/dashboard" style={{ color: 'white' }}>Home</Link>
+          <LINK to="/dashboard">Home</LINK>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
-        <Navbar.Form pullLeft style={{ border: 'none', boxShadow: 'none' }}>
+        <FORM pullLeft>
           <FormGroup>
             <FormControl type="text" placeholder="Search" />
           </FormGroup>
-          <Button type="submit" style={{ marginLeft: '10px' }}>Search</Button>
-        </Navbar.Form>
+          <BUTTON type="submit"><Glyphicon glyph="search" /></BUTTON>
+        </FORM>
         <Nav pullRight>
-          <NAVITEM eventKey={1} className="foo">
+          <NAVITEM eventKey={1}>
+            <Glyphicon glyph="envelope" />
+          </NAVITEM>
+          <NAVITEM eventKey={2}>
             Settings
           </NAVITEM>
-          <NAVITEM eventKey={2} href="/api/logout">
+          <NAVITEM eventKey={3} href="/api/logout">
             Log Out
           </NAVITEM>
         </Nav>
       </Navbar.Collapse>
-    </Navbar>
+    </NAVBAR>
   );
 };
 
