@@ -21,7 +21,7 @@ class Settings extends Component {
 
   renderSettingsContent() {
     return (
-      <div key="2" style={{ backgroundColor: '#314459', height: '2000px', paddingTop: '50px' }}>
+      <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
         <div className="container">
           <h1>Settings</h1>
         </div>

@@ -6,12 +6,7 @@ import * as actions from '../../actions';
 import { BUTTON } from '../styledComponents/Header';
 
 class Search extends Component {
-  constructor() {
-    super();
-    this.state = {
-      searchText: ''
-    }
-  }
+  state = { searchText: '' };
 
   onChange(e) {
     this.setState({searchText: e.target.value});
