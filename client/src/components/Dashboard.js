@@ -13,19 +13,21 @@ class Dashboard extends Component {
       case false:
         return <Redirect to='/'/>;
       default:
-        return this.renderDashboardContent()
+        return [
+          <Header key="1" />,
+          this.renderDashboardContent()
+        ]
     }
   }
 
   renderDashboardContent() {
-    return ([
-      <Header key="1" />,
+    return (
       <div key="2" style={{ backgroundColor: '#314459', height: '2000px', paddingTop: '50px' }}>
         <div className="container">
           <h1>Dashboard</h1>
         </div>
       </div>
-    ]);
+    );
   }
 
   render() {

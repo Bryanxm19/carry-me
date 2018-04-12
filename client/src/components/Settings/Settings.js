@@ -12,19 +12,21 @@ class Settings extends Component {
       case false:
         return <Redirect to='/'/>;
       default:
-        return this.renderSettingsContent()
+        return [
+          <Header key="1" />,
+          this.renderSettingsContent()
+        ]
     }
   }
 
   renderSettingsContent() {
-    return ([
-      <Header key="1" />,
+    return (
       <div key="2" style={{ backgroundColor: '#314459', height: '2000px', paddingTop: '50px' }}>
         <div className="container">
           <h1>Settings</h1>
         </div>
       </div>
-    ]);
+    );
   }
 
   render() {
