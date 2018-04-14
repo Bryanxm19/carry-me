@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import Header from '../header/Header';
@@ -45,7 +44,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(
-  reduxForm({
-  form: 'SettingsForm'
-  })(Settings));
+export default connect(mapStateToProps)(Settings);
