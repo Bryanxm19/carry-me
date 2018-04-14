@@ -2,6 +2,9 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+
 import validateEmail from '../../utils/validateEmail';
 import SettingsField from './SettingsField';
 import formFields from './formFields';
@@ -24,7 +27,7 @@ class SettingsForm extends Component {
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.props.handleSubmit(this.props.submitUserSettings)}>
           {this.renderFields()}
           <Link to="/dashboard" className="red btn-flat white-text">
             Cancel
@@ -54,8 +57,9 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
-  validate,
-  form: 'settingsForm',
-  destroyOnUnmount: true
-})(SettingsForm);
+export default connect(null, actions)(
+  reduxForm({
+    validate,
+    form: 'settingsForm',
+    destroyOnUnmount: true
+  })(SettingsForm));
