@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+const uniqueChecker = require('../services/uniqueErrorChecker');
 const requireLogin = require('../middlewares/requireLogin');
 const User = mongoose.model('users');
 
@@ -9,15 +10,15 @@ module.exports = app => {
       const user = await User.findByIdAndUpdate(req.user._id, req.body, {new: true});
 
       if (!user) {
-        return res.status(404).send(new MyError('Not Found Error', ['User not found']));
+        return res.status(404).send('404: User Not Found');
       } else {
-        res.status(200).send(user);
+        return res.status(200).send(user);
       }
     } catch (err) {
       if (err.name === 'MongoError' && err.code === 11000) {
-        res.status(409).send(new MyError('Duplicate key', [err.message]));
+        return res.status(409).send(uniqueChecker(err.message));
       }
-      res.status(500).send(new MyError('Unknown Server Error', ['Unknow server error when updating bookmark for user id ' + req.params.userId + ' and bookmark id '+ req.params.bookmarkId]));
+      return res.status(500).send('Unknown Server Error');
     }
   });
 };
