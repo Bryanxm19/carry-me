@@ -14,7 +14,7 @@ export const submitUserSettings = (values, history) => dispatch => {
         history.push("/dashboard");
       })
       .catch(function(error){
-        dispatch({ type: FETCH_ERRORS, payload: error.response.data.error });
+        dispatch({ type: FETCH_ERRORS, payload: error.response.data });
       });
 
 }

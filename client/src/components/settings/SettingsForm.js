@@ -31,11 +31,12 @@ class SettingsForm extends Component {
 
   renderErrors() {
     if (this.props.errors) {
-      return _.map(this.props.errors, (error) => {
-        return (
-          <p className="text-danger" key={error}>{error}</p>
-        );
-      });
+      const values = Object.values(this.props.errors)
+      const errors = []
+      for (var i in values) {
+        errors.push(<p className="text-danger" key={i}>{values[i]}</p>)
+      }
+      return errors;
     }
   }
 
