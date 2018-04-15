@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER } from './types';
+import { FETCH_USER, FETCH_ERRORS, CLEAR_ERRORS } from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -7,8 +7,18 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 }
 
-export const submitUserSettings = (values) => async dispatch => {
-  const res = await axios.put('/api/settings', values);
+export const submitUserSettings = (values, history) => dispatch => {
+    axios.put('/api/settings', values)
+      .then(function(res){
+        dispatch({ type: FETCH_USER, payload: res.data });
+        history.push("/dashboard");
+      })
+      .catch(function(error){
+        dispatch({ type: FETCH_ERRORS, payload: error.response.data.error });
+      });
 
-  dispatch({ type: FETCH_USER, payload: res.data });
+}
+
+export const clearErrors = () => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
 }
