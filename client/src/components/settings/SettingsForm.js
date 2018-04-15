@@ -10,6 +10,11 @@ import SettingsField from './SettingsField';
 import formFields from './formFields';
 
 class SettingsForm extends Component {
+
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   renderFields() {
     return _.map(formFields, ({ label, name }) => {
       return (
@@ -24,10 +29,26 @@ class SettingsForm extends Component {
     });
   }
 
+  renderErrors() {
+    if (this.props.errors) {
+      return _.map(this.props.errors, (error) => {
+        return (
+          <p className="text-danger" key={error}>{error}</p>
+        );
+      });
+    }
+  }
+
+  submitForm(values) {
+    const { submitUserSettings, history } = this.props
+    submitUserSettings(values, history);
+  }
+
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(this.props.submitUserSettings)}>
+        {this.renderErrors()}
+        <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
           <Link to="/dashboard" className="red btn-flat white-text">
             Cancel
@@ -57,7 +78,11 @@ function validate(values) {
   return errors;
 }
 
-export default connect(null, actions)(
+function mapStateToProps({ errors }) {
+  return { errors };
+}
+
+export default connect(mapStateToProps, actions)(
   reduxForm({
     validate,
     form: 'settingsForm',
