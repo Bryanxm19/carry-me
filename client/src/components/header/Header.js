@@ -28,6 +28,9 @@ const Header = () => {
           <NAVITEM>
             <Glyphicon glyph="envelope" />
           </NAVITEM>
+          <NAVITEM>
+            <Glyphicon glyph="bell" />
+          </NAVITEM>
           <LinkContainer to="/settings" activeClassName="">
             <NAVITEM href="/settings">
               Settings

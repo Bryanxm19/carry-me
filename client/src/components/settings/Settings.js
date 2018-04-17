@@ -24,7 +24,7 @@ class Settings extends Component {
     const { auth, history } = this.props;
     return (
       <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
-        <div className="container">
+        <div className="container" style={{ paddingTop: '50px' }}>
           <SettingsForm initialValues={auth} history={history} />
         </div>
       </div>

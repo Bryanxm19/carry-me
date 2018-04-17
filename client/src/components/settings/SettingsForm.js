@@ -17,6 +17,7 @@ class SettingsForm extends Component {
 
   renderFields() {
     return _.map(formFields, ({ label, name }) => {
+      const error = this.props.errors ? this.props.errors[name] : false
       return (
         <Field
           key={name}
@@ -24,20 +25,10 @@ class SettingsForm extends Component {
           type="text"
           label={label}
           name={name}
+          err={error}
         />
       );
     });
-  }
-
-  renderErrors() {
-    if (this.props.errors) {
-      const values = Object.values(this.props.errors)
-      const errors = []
-      for (var i in values) {
-        errors.push(<p className="text-danger" key={i}>{values[i]}</p>)
-      }
-      return errors;
-    }
   }
 
   submitForm(values) {
@@ -47,16 +38,17 @@ class SettingsForm extends Component {
 
   render() {
     return (
-      <div>
-        {this.renderErrors()}
+      <div className="row text-center">
         <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
-          <Link to="/dashboard" className="red btn-flat white-text">
-            Cancel
-          </Link>
-          <button type="submit" className="teal btn-flat right white-text">
-            Update
-          </button>
+          <div className="col-md-12">
+            <Link to="/dashboard" className="red btn-flat white-text">
+              Cancel
+            </Link>
+            <button type="submit" className="teal btn-flat right white-text">
+              Update
+            </button>
+          </div>
         </form>
       </div>
     );
