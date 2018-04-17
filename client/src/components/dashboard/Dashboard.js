@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Header from './header/Header';
+import Header from '../header/Header';
+import CarriesContainer from './CarriesContainer';
 
 class Dashboard extends Component {
 
@@ -23,8 +24,8 @@ class Dashboard extends Component {
   renderDashboardContent() {
     return (
       <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
-        <div className="container">
-          <h1>Dashboard</h1>
+        <div className="container" style={{ paddingTop: '50px' }}>
+          <CarriesContainer {...this.props} />
         </div>
       </div>
     );
