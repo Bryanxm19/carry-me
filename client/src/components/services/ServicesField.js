@@ -9,24 +9,31 @@ class ServicesField extends Component {
     this.props.changeType(e.target.value)
   }
 
-  renderInput(type) {
+  renderInput(name) {
     const { input, placeholder, serviceType } = this.props
     input.placeholder = typeof placeholder === 'string' ? placeholder : placeholder[serviceType]
-    switch (type) {
-      case 'select':
-        const { options } = this.props
+    switch (name) {
+      case 'type':
         input.value = serviceType
         input.onChange = this.changeType.bind(this)
-        return <select {...input} style={{ marginBottom: '5px', width: '75%' }}>{this.renderSelectOptions(options)}</select>;
-      case 'textarea':
+        return <select {...input} style={{ marginBottom: '5px', width: '75%' }}>{this.renderTypeOptions(this.props.options)}</select>;
+      case 'description':
         input.rows = "3"
         return <textarea {...input} style={{ marginBottom: '5px', width: '75%', resize: 'none' }}></textarea>
+      case 'game':
+        input.type = "hidden"
+        return (
+          <div>
+            <input style={{ marginBottom: '5px', width: '75%' }} />
+            <input {...input} />
+          </div>
+        )
       default:
         return <input {...input} style={{ marginBottom: '5px', width: '75%' }} />
     }
   }
 
-  renderSelectOptions(options) {
+  renderTypeOptions(options) {
 
     const labels = {
       "carries": "Help carry other gamers",
@@ -39,17 +46,17 @@ class ServicesField extends Component {
   }
 
   render() {
-    const { label, type, meta: { error, touched } } = this.props;
+    const { label, input, meta: { error, touched } } = this.props;
 
     return (
-      <div className="col-xs-12" style={{ marginTop: '10px' }}>
+      <div className="col-sm-12" style={{ marginTop: '10px' }}>
         <div className="row">
           <div className="col-sm-2"></div>
           <LABELDIV className="col-sm-2 col-xs-12" style={{ textAlign: 'left' }}>
             <label style={{ fontSize: '16px' }}>{label}</label>
           </LABELDIV>
           <div className="col-sm-6 col-xs-12">
-            {this.renderInput(type)}
+            {this.renderInput(input.name)}
           </div>
           <div className="col-sm-2"></div>
           <div className="text-danger col-sm-10 col-sm-offset-2" style={{ marginBottom: '20px' }}>
