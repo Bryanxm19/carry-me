@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import axios from 'axios';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -11,7 +12,22 @@ import ServicesField from './ServicesField';
 
 class ServicesForm extends Component {
 
-  state = { serviceType: this.props.serviceType }
+  state = { 
+    serviceType: this.props.serviceType,
+    games: []
+  }
+
+
+  gameSearch(query) {
+    const obj = this
+    axios.post('/api/lookup_games', { query })
+      .then(function(res){
+        obj.setState({ games: res.data })
+      })
+      .catch(function(error){
+        obj.setState({ games: [] })
+      });
+  }
 
   renderFields() {
     return _.map(formFields, ({ label, name, type, placeholder, options }) => {
@@ -26,6 +42,8 @@ class ServicesForm extends Component {
           options={options || []}
           serviceType={this.state.serviceType}
           changeType={(type) => this.setState({ serviceType: type })}
+          games={this.state.games}
+          searchGames={(query) => this.gameSearch(query)}
         />
       );
     });
@@ -63,7 +81,7 @@ function validate(values) {
   const errors = {};
 
   _.each(formFields, ({ name }) => {
-    if (!values[name] && name !== 'description') {
+    if (!values[name]) {
       errors[name] = 'You must provide a value';
     }
   });
