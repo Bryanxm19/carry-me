@@ -14,7 +14,9 @@ class ServicesForm extends Component {
 
   state = { 
     serviceType: this.props.serviceType,
-    games: []
+    games: [],
+    selectedGame: {},
+    platforms: []
   }
 
 
@@ -27,6 +29,26 @@ class ServicesForm extends Component {
       .catch(function(error){
         obj.setState({ games: [] })
       });
+  }
+
+  createPlatformOptions(options) {
+    const platforms = []
+    _.forEach(options, function(option) {
+      switch (option) {
+        case 6:
+          platforms.push("PC")
+          break
+        case 48:
+          platforms.push("Playstation 4")
+          break
+        case 49:
+          platforms.push("Xbox One")
+          break
+        default:
+          break
+      }
+    });
+    return platforms
   }
 
   renderFields() {
@@ -44,7 +66,10 @@ class ServicesForm extends Component {
           changeType={(type) => this.setState({ serviceType: type })}
           games={this.state.games}
           searchGames={(query) => this.gameSearch(query)}
-          clearGames={() => this.setState({ games: [] })}
+          selectGame={(game) => this.setState({ selectedGame: game, games: [], platforms: this.createPlatformOptions(game.platforms) })}
+          clearSelectedGame={() => this.setState({ selectedGame: {}, platforms: [] })}
+          selectedGame={this.state.selectedGame}
+          platforms={this.state.platforms}
         />
       );
     });
