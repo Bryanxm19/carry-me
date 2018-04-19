@@ -11,3 +11,13 @@ export const LABELDIV = styled.div`
     text-align: center !important;
   }
 `
+
+export const LI = styled.li`
+  @media (max-width: 767px) and (min-width: 397px) {
+    padding-left: 9%;
+  }
+
+  @media (max-width: 1200px) and (min-width: 992px) {
+    padding-left: 0;
+  }
+`
