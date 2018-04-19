@@ -6,8 +6,7 @@ import { LABELDIV, LI } from '../styledComponents/Services';
 class ServicesField extends Component {
 
   state = {
-    gameSearch: "",
-    selectedGame: {}
+    gameSearch: ""
   }
 
   changeType(e) {
@@ -19,13 +18,13 @@ class ServicesField extends Component {
     if (e.target.value.length > 3) {
       this.props.searchGames(e.target.value)
     } else {
-      this.setState({ selectedGame: {} })
+      this.props.clearSelectedGame()
     }
   }
 
   selectGame(game) {
-    this.setState({ selectedGame: game, gameSearch: game.name })
-    this.props.clearGames()
+    this.setState({ gameSearch: game.name })
+    this.props.selectGame(game)
   }
 
   renderInput(name) {
@@ -41,7 +40,7 @@ class ServicesField extends Component {
         return <textarea {...input} style={{ marginBottom: '5px', width: '75%', resize: 'none' }}></textarea>
       case 'game':
         input.type = "hidden"
-        input.value = this.state.selectedGame.name || ""
+        input.value = this.props.selectedGame.name || ""
         return (
           <div>
             <input style={{ marginBottom: '5px', width: '75%' }} value={this.state.gameSearch} onChange={this.lookupGames.bind(this)} />
@@ -49,6 +48,8 @@ class ServicesField extends Component {
             <input {...input} />
           </div>
         )
+      case 'platform':
+        return <select {...input} style={{ marginBottom: '5px', width: '75%' }}>{this.renderPlatformOptions(this.props.platforms)}</select>
       default:
         return <input {...input} style={{ marginBottom: '5px', width: '75%' }} />
     }
@@ -63,6 +64,12 @@ class ServicesField extends Component {
 
     return _.map(options, (option, i) => {
       return <option key={i} value={option}>{labels[option]}</option>
+    });
+  }
+
+  renderPlatformOptions(platforms) {
+    return _.map(platforms, (platform, i) => {
+      return <option key={i} value={platform}>{platform}</option>
     });
   }
 
