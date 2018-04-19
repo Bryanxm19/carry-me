@@ -1,12 +1,18 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 
-import { LABELDIV } from '../styledComponents/Services';
+import { LABELDIV, LI } from '../styledComponents/Services';
 
 class ServicesField extends Component {
 
   changeType(e) {
     this.props.changeType(e.target.value)
+  }
+
+  lookupGames(e) {
+    if (e.target.value.length > 3) {
+      this.props.searchGames(e.target.value)
+    }
   }
 
   renderInput(name) {
@@ -24,7 +30,8 @@ class ServicesField extends Component {
         input.type = "hidden"
         return (
           <div>
-            <input style={{ marginBottom: '5px', width: '75%' }} />
+            <input style={{ marginBottom: '5px', width: '75%' }} onChange={this.lookupGames.bind(this)} />
+            {this.renderSearchedGames(this.props.games)}
             <input {...input} />
           </div>
         )
@@ -42,6 +49,36 @@ class ServicesField extends Component {
 
     return _.map(options, (option, i) => {
       return <option key={i} value={option}>{labels[option]}</option>
+    });
+  }
+
+  renderSearchedGames(games) {
+    if (games.length) {
+      return (
+        <div className="row">
+          <ul style={{ listStyle: 'none', textAlign: 'left' }}>
+            {this.renderGameResults(games)}
+          </ul>
+        </div>
+      )
+    }
+    return
+  }
+
+  renderGameResults(games) {
+    return _.map(games, (game, i) => {
+      return (
+        <LI key={i} className="col-xs-12" style={{ marginTop: '10px' }}>
+          <div className="row">
+            <div className="col-xs-2">
+              <img src={"https:" + game.cover.url} alt="game cover" height="35" width="35" style={{ borderRadius: '50%' }} />
+            </div>
+            <div className="col-xs-10" style={{ paddingTop: '5px' }}>
+              {game.name}
+            </div>
+          </div>
+        </LI>
+      )
     });
   }
 
