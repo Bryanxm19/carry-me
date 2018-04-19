@@ -39,7 +39,7 @@ module.exports = app => {
     }).then(response => {
       res.status(200).send(response.body)
     }).catch(error => {
-        res.status(500).send('Unknown Server Error')
+        res.status(500).send(error)
     });
   });
 };
