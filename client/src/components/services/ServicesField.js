@@ -5,14 +5,27 @@ import { LABELDIV, LI } from '../styledComponents/Services';
 
 class ServicesField extends Component {
 
+  state = {
+    gameSearch: "",
+    selectedGame: {}
+  }
+
   changeType(e) {
     this.props.changeType(e.target.value)
   }
 
   lookupGames(e) {
+    this.setState({ gameSearch: e.target.value })
     if (e.target.value.length > 3) {
       this.props.searchGames(e.target.value)
+    } else {
+      this.setState({ selectedGame: {} })
     }
+  }
+
+  selectGame(game) {
+    this.setState({ selectedGame: game, gameSearch: game.name })
+    this.props.clearGames()
   }
 
   renderInput(name) {
@@ -28,9 +41,10 @@ class ServicesField extends Component {
         return <textarea {...input} style={{ marginBottom: '5px', width: '75%', resize: 'none' }}></textarea>
       case 'game':
         input.type = "hidden"
+        input.value = this.state.selectedGame.name || ""
         return (
           <div>
-            <input style={{ marginBottom: '5px', width: '75%' }} onChange={this.lookupGames.bind(this)} />
+            <input style={{ marginBottom: '5px', width: '75%' }} value={this.state.gameSearch} onChange={this.lookupGames.bind(this)} />
             {this.renderSearchedGames(this.props.games)}
             <input {...input} />
           </div>
@@ -68,16 +82,18 @@ class ServicesField extends Component {
   renderGameResults(games) {
     return _.map(games, (game, i) => {
       return (
-        <LI key={i} className="col-xs-12" style={{ marginTop: '10px' }}>
-          <div className="row">
-            <div className="col-xs-2">
-              <img src={"https:" + game.cover.url} alt="game cover" height="35" width="35" style={{ borderRadius: '50%' }} />
+        <a key={i} onClick={() => this.selectGame(game)} style={{ cursor: 'pointer' }}>
+          <LI className="col-xs-12" style={{ marginTop: '10px' }}>
+            <div className="row">
+              <div className="col-xs-2">
+                <img src={"https:" + game.cover.url} alt="game cover" height="35" width="35" style={{ borderRadius: '50%' }} />
+              </div>
+              <div className="col-xs-10" style={{ paddingTop: '5px' }}>
+                {game.name}
+              </div>
             </div>
-            <div className="col-xs-10" style={{ paddingTop: '5px' }}>
-              {game.name}
-            </div>
-          </div>
-        </LI>
+          </LI>
+        </a>
       )
     });
   }
