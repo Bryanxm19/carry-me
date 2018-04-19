@@ -44,6 +44,7 @@ class ServicesForm extends Component {
           changeType={(type) => this.setState({ serviceType: type })}
           games={this.state.games}
           searchGames={(query) => this.gameSearch(query)}
+          clearGames={() => this.setState({ games: [] })}
         />
       );
     });
@@ -82,7 +83,11 @@ function validate(values) {
 
   _.each(formFields, ({ name }) => {
     if (!values[name]) {
-      errors[name] = 'You must provide a value';
+      if (name === 'platform') {
+        errors[name] = 'Make sure to select a game first. Then choose the platform.'
+      } else {
+        errors[name] = 'You must provide a value';
+      }
     }
   });
 
