@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const igdb = require('igdb-api-node').default;
+const keys = require('../config/keys');
 
 const uniqueChecker = require('../services/uniqueErrorChecker');
 const requireLogin = require('../middlewares/requireLogin');
@@ -20,5 +22,24 @@ module.exports = app => {
       }
       return res.status(500).send('Unknown Server Error');
     }
+  });
+
+  app.post('/api/lookup_games', (req, res) => {
+    const client = igdb(keys.igdbKey);
+    client.games({
+        filters: {
+          'release_dates.platform-eq': 48,
+          'release_dates.platform-eq': 49,
+          'release_dates.platform-eq': 6
+        },
+        fields: '*', // Return all fields
+        limit: 5, // Limit to 5 results
+        order: 'popularity:desc',
+        search: req.body.query
+    }).then(response => {
+      res.status(200).send(response.body)
+    }).catch(error => {
+        throw error;
+    });
   });
 };
