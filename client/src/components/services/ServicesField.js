@@ -50,6 +50,12 @@ class ServicesField extends Component {
         )
       case 'platform':
         return <select {...input} style={{ marginBottom: '5px', width: '75%' }}>{this.renderPlatformOptions(this.props.platforms)}</select>
+      case 'price':
+        input.type = "number"
+        return [
+          <span style={{ fontSize: '16px' }}>$</span>,
+          <input {...input} style={{ marginBottom: '5px', width: '40%' }} />
+        ]
       default:
         return <input {...input} style={{ marginBottom: '5px', width: '75%' }} />
     }
