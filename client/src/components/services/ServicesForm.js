@@ -92,7 +92,7 @@ class ServicesForm extends Component {
         </div>
         <form>
           {this.renderFields()}
-          <div className="col-sm-12" style={{ marginBottom: '10px' }}>
+          <div className="col-sm-12" style={{ marginBottom: '10px', marginTop: '10px' }}>
             <button type="submit" className="btn btn-primary">
               Save
             </button>
