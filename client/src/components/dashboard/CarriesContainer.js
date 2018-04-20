@@ -17,7 +17,7 @@ class CarriesContainer extends Component {
     return (
       <div className="row">
         <ActiveServices type="Carries" services={this.find('carries')} />
-        <div className="col-md-2"></div>
+        <div className="col-lg-2"></div>
         <ActiveServices type="Goals" services={this.find('goals')} />
       </div>
     );
