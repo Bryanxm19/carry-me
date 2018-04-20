@@ -113,6 +113,10 @@ function validate(values) {
       } else {
         errors[name] = 'You must provide a value';
       }
+    } else {
+      if (name === 'price' && !(Number.isInteger(values[name] * 1))) {
+        errors[name] = 'Price can only be USD (no decimals)'
+      }
     }
   });
 
