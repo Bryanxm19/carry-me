@@ -53,8 +53,8 @@ class ServicesField extends Component {
       case 'price':
         input.type = "number"
         return [
-          <span style={{ fontSize: '16px' }}>$</span>,
-          <input {...input} style={{ marginBottom: '5px', width: '40%' }} />
+          <span key={1} style={{ fontSize: '16px' }}>$</span>,
+          <input key={2} {...input} style={{ marginBottom: '5px', width: '40%' }} />
         ]
       default:
         return <input {...input} style={{ marginBottom: '5px', width: '75%' }} />
