@@ -112,6 +112,10 @@ class ServicesField extends Component {
 
   render() {
     const { label, input, meta: { error, touched } } = this.props;
+    if (!label.length) {
+      input.type = "hidden"
+      return <input {...input} />
+    }
     return (
       <div className="col-sm-12" style={{ marginTop: '10px' }}>
         <div className="row">

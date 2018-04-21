@@ -4,5 +4,6 @@ export default [
   { label: 'Description', name: 'description', placeholder: { "carries": "Example: I will get you a win in Fortnite", "goals": "Example: I have never won a game of Fortnite and need some help" } },
   { label: 'Game', name: 'game', placeholder: '' },
   { label: 'Platform', name: 'platform', placeholder: '' },
+  { label: '', name: 'imageURL', placeholder: '' },
   { label: 'Price', name: 'price', placeholder: '' }
 ];

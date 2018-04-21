@@ -40,6 +40,7 @@ class ServicesForm extends Component {
 
     obj.setState({ games: [], platforms: obj.createPlatformOptions(game.platforms) })
     obj.props.change('game', game.name)
+    obj.props.change('imageURL', "https:" + game.cover.url)
   }
 
   createPlatformOptions(options) {
