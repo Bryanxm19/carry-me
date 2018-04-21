@@ -27,7 +27,7 @@ class Settings extends Component {
     return (
       <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
         <DIV className="container" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
-          <ServicesForm serviceType={state ? state.type : 'carries'} />
+          <ServicesForm serviceType={state ? state.type : 'carries'} history={this.props.history} />
         </DIV>
       </div>
     );
