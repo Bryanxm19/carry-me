@@ -6,11 +6,11 @@ import ActiveServices from './ActiveServices';
 class CarriesContainer extends Component {
 
   find(carryType) {
-    const { carries } = this.props.auth;
-
-    return _.filter(carries, ({ type }) => {
-      return carryType === type
-    });
+    const { carries, goals } = this.props.auth;
+    if (carryType === "carries") {
+      return carries
+    }
+    return goals
   }
 
   render() {
