@@ -9,7 +9,7 @@ export const fetchUser = () => async dispatch => {
 
 export const submitUserSettings = (values, history) => dispatch => {
     axios.put('/api/settings', values)
-      .then(function(res){
+      .then(function(res) {
         dispatch({ type: FETCH_USER, payload: res.data });
         history.push("/dashboard");
       })
@@ -21,4 +21,15 @@ export const submitUserSettings = (values, history) => dispatch => {
 
 export const clearErrors = () => dispatch => {
   dispatch({ type: CLEAR_ERRORS });
+}
+
+export const submitService = (values, history) => dispatch => {
+  axios.post('/api/services', values)
+    .then(function(res) {
+      dispatch({ type: FETCH_USER, payload: res.data });
+      history.push("/dashboard");
+    })
+    .catch(function(error){
+      dispatch({ type: FETCH_ERRORS, payload: error.response.data });
+    });
 }
