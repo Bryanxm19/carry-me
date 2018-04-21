@@ -40,7 +40,6 @@ class ServicesField extends Component {
         return <textarea {...input} style={{ marginBottom: '5px', width: '75%', resize: 'none' }}></textarea>
       case 'game':
         input.type = "hidden"
-        input.value = this.props.selectedGame.name || ""
         return (
           <div>
             <input style={{ marginBottom: '5px', width: '75%' }} value={this.state.gameSearch} onChange={this.lookupGames.bind(this)} />
@@ -113,7 +112,6 @@ class ServicesField extends Component {
 
   render() {
     const { label, input, meta: { error, touched } } = this.props;
-
     return (
       <div className="col-sm-12" style={{ marginTop: '10px' }}>
         <div className="row">

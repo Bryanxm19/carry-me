@@ -15,8 +15,12 @@ class ServicesForm extends Component {
   state = { 
     serviceType: this.props.serviceType,
     games: [],
-    selectedGame: {},
     platforms: []
+  }
+
+  submitForm(values) {
+    const { submitService, history } = this.props
+    submitService(values, history);
   }
 
 
@@ -29,6 +33,13 @@ class ServicesForm extends Component {
       .catch(function(error){
         obj.setState({ games: [] })
       });
+  }
+
+  gamesSelect(game) {
+    const obj = this
+
+    obj.setState({ games: [], platforms: obj.createPlatformOptions(game.platforms) })
+    obj.props.change('game', game.name)
   }
 
   createPlatformOptions(options) {
@@ -66,9 +77,8 @@ class ServicesForm extends Component {
           changeType={(type) => this.setState({ serviceType: type })}
           games={this.state.games}
           searchGames={(query) => this.gameSearch(query)}
-          selectGame={(game) => this.setState({ selectedGame: game, games: [], platforms: this.createPlatformOptions(game.platforms) })}
-          clearSelectedGame={() => this.setState({ selectedGame: {}, platforms: [] })}
-          selectedGame={this.state.selectedGame}
+          selectGame={(game) => this.gamesSelect(game)}
+          clearSelectedGame={() => this.setState({ platforms: [] })}
           platforms={this.state.platforms}
         />
       );
@@ -90,10 +100,10 @@ class ServicesForm extends Component {
             </div>
           </div>
         </div>
-        <form>
+        <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
           {this.renderFields()}
           <div className="col-sm-12" style={{ marginBottom: '10px', marginTop: '10px' }}>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn" style={{ width: '20%', backgroundColor: '#314459', color: 'white', letterSpacing: '1.5px', fontSize: '16px' }}>
               Save
             </button>
           </div>
@@ -123,9 +133,10 @@ function validate(values) {
   return errors;
 }
 
-export default connect(null, actions)(
-  reduxForm({
+ServicesForm = reduxForm({
     validate,
     form: 'servicesForm',
     destroyOnUnmount: true
-  })(ServicesForm));
+  })(ServicesForm);
+
+export default ServicesForm = connect(null, actions)(ServicesForm);
