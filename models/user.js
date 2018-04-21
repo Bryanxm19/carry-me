@@ -13,7 +13,19 @@ const userSchema = new Schema({
     type: String,
     unique: true,
     required: true
-   }
+  },
+  carries: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Service' 
+    }
+  ],
+  goals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Service' 
+    }
+  ]
 },
 {
   timestamps: true
