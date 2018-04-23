@@ -38,9 +38,9 @@ module.exports = app => {
         res.status(500).send('Unknown Server Error')
       } else {
         if (params['type'] === 'carries') {
-          user.carries.push(service)
+          user.carries.push(service._id)
         } else {
-          user.goals.push(service)
+          user.goals.push(service._id)
         }
         user.save()
           .then(user => {
