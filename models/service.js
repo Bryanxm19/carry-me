@@ -32,11 +32,11 @@ const serviceSchema = new Schema({
   },
   creator: {
     type: Schema.Types.ObjectId,
-    ref: 'User' 
+    ref: 'users' 
   }
 },
 {
   timestamps: true
 });
 
-mongoose.model('services', serviceSchema);
+const Service = mongoose.model('services', serviceSchema);

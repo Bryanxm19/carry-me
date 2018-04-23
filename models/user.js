@@ -17,13 +17,13 @@ const userSchema = new Schema({
   carries: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Service' 
+      ref: 'services' 
     }
   ],
   goals: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Service' 
+      ref: 'services' 
     }
   ]
 },
@@ -32,4 +32,5 @@ const userSchema = new Schema({
 });
 
 userSchema.plugin(uniqueValidator);
-mongoose.model('users', userSchema);
+
+const User = mongoose.model('users', userSchema);
