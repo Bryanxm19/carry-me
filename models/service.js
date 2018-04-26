@@ -24,7 +24,7 @@ const serviceSchema = new Schema({
   },
   imageURL: {
     type: String,
-    required: true
+    default: ""
   },
   price: {
     type: Number,
