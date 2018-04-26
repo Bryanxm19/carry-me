@@ -98,7 +98,7 @@ class ServicesField extends Component {
           <LI className="col-xs-12" style={{ marginTop: '10px' }}>
             <div className="row">
               <div className="col-xs-2">
-                <img src={"https:" + game.cover.url} alt="game cover" height="35" width="35" style={{ borderRadius: '50%' }} />
+                <img src={game.cover ? "https:" + game.cover.url : "img"} alt="" height="35" width="35" style={{ borderRadius: '50%' }} />
               </div>
               <div className="col-xs-10" style={{ paddingTop: '5px' }}>
                 {game.name}
