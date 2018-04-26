@@ -53,4 +53,15 @@ module.exports = app => {
       }
     })
   });
+
+  app.get('/api/goals', requireLogin, async (req, res) => {
+    const user = await User.findById(req.user._id).populate({
+      path: 'goals',
+      options: {
+        limit: req.query.limit,
+        sort: { createdAt: -1},
+      }
+    })
+    res.send(user.goals)
+  });
 }
