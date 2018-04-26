@@ -21,3 +21,12 @@ export const LI = styled.li`
     padding-left: 0;
   }
 `
+
+export const ITEM = styled.div`
+  cursor: pointer;
+
+  &:hover > .service-item-overlay {
+    background-color: #000;
+    opacity: 0.7;
+  }
+`
