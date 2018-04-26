@@ -7,8 +7,8 @@ import ServiceList from './ServiceList';
 class ActiveServices extends Component {
   render() {
     return (
-      <div className="col-md-5" style={{ backgroundColor: 'white', borderRadius: '.25rem' }}>
-        <div className="row" style={{ borderBottom: '2px solid #314459', marginBottom: '10px' }}>
+      <div className="col-md-5" style={{ backgroundColor: 'white', borderRadius: '.25rem', marginBottom: '10px' }}>
+        <div className="row" style={{ borderBottom: '2px solid #314459' }}>
           <div className="col-xs-8">
             <h1>Active {this.props.type}</h1>
           </div>
