@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 import Header from '../header/Header';
 import CarriesContainer from './CarriesContainer';
 
 class Dashboard extends Component {
+
+  componentWillMount() {
+    this.props.fetchUserGoals(6)
+  }
 
   checkAuth() {
     switch (this.props.auth) {
@@ -41,8 +46,8 @@ class Dashboard extends Component {
 
 }
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({ auth, goals }) {
+  return { auth, goals };
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, actions)(Dashboard);
