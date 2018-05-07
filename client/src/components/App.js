@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+import NoMatch from './NoMatch';
 import Landing from './Landing';
 import Dashboard from './dashboard/Dashboard';
 import Settings from './settings/Settings';
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path="/settings" component={Settings} />
           <Route exact path="/services/new" component={ServicesNew} />
           <Route path="/services/:id" component={ServicesShow} />
+          <Route component={NoMatch} status={404} />
         </div>
       </BrowserRouter>
     );
