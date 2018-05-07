@@ -64,4 +64,14 @@ module.exports = app => {
     })
     res.send(user.goals)
   });
+
+  app.get('/api/services/:id', requireLogin, async (req, res) => {
+    const service = await Service.findById(req.params.id)
+
+    if (service) {
+      res.status(200).send(service)
+    } else {
+      res.status(404).send('Service Not Found')
+    }
+  });
 }
