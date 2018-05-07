@@ -2,6 +2,7 @@ import axios from 'axios';
 import { 
   FETCH_USER,
   FETCH_USER_GOALS,
+  FETCH_SERVICE,
   FETCH_ERRORS,
   CLEAR_ERRORS 
 } from './types';
@@ -18,13 +19,23 @@ export const fetchUserGoals = (limit = 10) => async dispatch => {
   dispatch({ type: FETCH_USER_GOALS, payload: res.data })
 }
 
+export const fetchService = (id, history) => dispatch => {
+  axios.get("/api/services/" + id)
+    .then(res => {
+      dispatch({ type: FETCH_SERVICE, payload: res.data})
+    })
+    .catch(error => {
+      history.push("/404")
+    })
+}
+
 export const submitUserSettings = (values, history) => dispatch => {
     axios.put('/api/settings', values)
-      .then(function(res) {
+      .then(res => {
         dispatch({ type: FETCH_USER, payload: res.data });
         history.push("/dashboard");
       })
-      .catch(function(error){
+      .catch(error =>{
         dispatch({ type: FETCH_ERRORS, payload: error.response.data });
       });
 
