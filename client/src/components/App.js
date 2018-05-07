@@ -7,6 +7,7 @@ import Landing from './Landing';
 import Dashboard from './dashboard/Dashboard';
 import Settings from './settings/Settings';
 import ServicesNew from './services/ServicesNew';
+import ServicesShow from './services/ServicesShow';
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/settings" component={Settings} />
           <Route exact path="/services/new" component={ServicesNew} />
+          <Route path="/services/:id" component={ServicesShow} />
         </div>
       </BrowserRouter>
     );
