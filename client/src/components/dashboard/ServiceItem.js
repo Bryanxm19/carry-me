@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { ITEM } from '../styledComponents/Services';
 
 class ServiceItem extends Component {
@@ -23,11 +24,13 @@ class ServiceItem extends Component {
   render() {
     const { service } = this.props;
     return (
-      <div className="col-xs-4 col-md-6" style={{ marginTop: '10px' }}>
-        <ITEM className="thumbnail" style={{ backgroundImage: `url(${service.imageURL})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', overflow: 'hidden', height: '150px' }} onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}>
-          {this.renderContent()}
-        </ITEM>
-      </div>
+      <Link to={"/services/" + service._id}>
+        <div className="col-xs-4 col-md-6" style={{ marginTop: '10px' }}>
+          <ITEM className="thumbnail" style={{ backgroundImage: `url(${service.imageURL})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', overflow: 'hidden', height: '150px' }} onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}>
+            {this.renderContent()}
+          </ITEM>
+        </div>
+      </Link>
     )
   }
 };
