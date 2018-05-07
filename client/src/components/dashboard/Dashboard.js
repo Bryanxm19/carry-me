@@ -1,29 +1,14 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import checkAuth from '../../utils/checkAuth';
 
-import Header from '../header/Header';
 import CarriesContainer from './CarriesContainer';
 
 class Dashboard extends Component {
 
   componentWillMount() {
     this.props.fetchUserGoals(6)
-  }
-
-  checkAuth() {
-    switch (this.props.auth) {
-      case null:
-        return;
-      case false:
-        return <Redirect to='/'/>;
-      default:
-        return [
-          <Header key="1" />,
-          this.renderDashboardContent()
-        ]
-    }
   }
 
   renderDashboardContent() {
@@ -39,7 +24,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        {this.checkAuth()}
+        {checkAuth(this.props.auth, this.renderDashboardContent.bind(this))}
       </div>
     );
   }

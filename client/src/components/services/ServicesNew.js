@@ -1,25 +1,11 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import checkAuth from '../../utils/checkAuth';
 
-import Header from '../header/Header';
 import ServicesForm from './ServicesForm';
 import { DIV } from '../styledComponents/Services';
 
 class Settings extends Component {
-  checkAuth() {
-    switch (this.props.auth) {
-      case null:
-        return;
-      case false:
-        return <Redirect to='/'/>;
-      default:
-        return [
-          <Header key="1" />,
-          this.renderServicesContent()
-        ]
-    }
-  }
 
   renderServicesContent() {
     const { state } = this.props.history.location;
@@ -36,7 +22,7 @@ class Settings extends Component {
   render() {
     return (
       <div>
-        {this.checkAuth()}
+        {checkAuth(this.props.auth, this.renderServicesContent.bind(this))}
       </div>
     );
   }
