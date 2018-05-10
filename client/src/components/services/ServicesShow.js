@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import checkAuth from '../../utils/checkAuth';
 
-import { DIV } from '../styledComponents/Services';
+import ServiceInfo from './ServiceInfo';
 
 class ServicesShow extends Component {
 
@@ -16,10 +16,11 @@ class ServicesShow extends Component {
   renderServiceContent() {
     return (
       <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
-        <DIV className="container" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+        <div className="container" style={{ paddingTop: '50px', paddingBottom: '20px' }}>
           <div className="row">
+            <ServiceInfo service={this.props.service} />
           </div>
-        </DIV>
+        </div>
       </div>
     );
   }
