@@ -30,3 +30,16 @@ export const ITEM = styled.div`
     opacity: 0.7;
   }
 `
+
+export const InfoFieldDiv = styled.div`
+  font-size: 18px;
+`
+
+export const InfoFieldP = styled.p`
+ font-weight: bold;
+`
+
+export const InfoFieldSpan = styled.span`
+  margin-left: 3px;
+  font-weight: normal;
+`
