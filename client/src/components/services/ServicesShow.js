@@ -4,6 +4,7 @@ import * as actions from '../../actions';
 import checkAuth from '../../utils/checkAuth';
 
 import ServiceInfo from './ServiceInfo';
+import ServiceRequests from './ServiceRequests';
 
 class ServicesShow extends Component {
 
@@ -14,11 +15,13 @@ class ServicesShow extends Component {
   }
 
   renderServiceContent() {
+    const { service } = this.props;
     return (
       <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
         <div className="container" style={{ paddingTop: '50px', paddingBottom: '20px' }}>
           <div className="row">
-            <ServiceInfo service={this.props.service} />
+            <ServiceInfo service={service} />
+            <ServiceRequests service={service} />
           </div>
         </div>
       </div>
