@@ -11,7 +11,7 @@ class ServiceInfo extends Component {
   render() {
     const { service } = this.props;
     return (
-      <div className="col-lg-4 col-md-5 col-sm-6 col-xs-12" style={{ backgroundColor: 'white', borderRadius: '.25rem' }}>
+      <div className="col-lg-4 col-md-5 col-sm-6 col-xs-12" style={{ backgroundColor: 'white', borderRadius: '.25rem', marginBottom: '10px' }}>
         <div className="row" style={{ borderBottom: '2px solid #314459' }}>
           <div className="col-xs-12 text-center">
             <h1 style={{ marginTop: '10px' }}>Service Info</h1>
