@@ -66,7 +66,7 @@ module.exports = app => {
   });
 
   app.get('/api/services/:id', requireLogin, async (req, res) => {
-    const service = await Service.findById(req.params.id)
+    const service = await Service.findById(req.params.id).populate('requests')
 
     if (service) {
       res.status(200).send(service)
