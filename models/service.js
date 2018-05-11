@@ -30,6 +30,16 @@ const serviceSchema = new Schema({
     type: Number,
     required: true
   },
+  status: {
+    type: String,
+    default: "Accepting Requests"
+  },
+  requests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'requests' 
+    }
+  ],
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'users' 

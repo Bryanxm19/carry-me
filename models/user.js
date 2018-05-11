@@ -25,6 +25,18 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'services' 
     }
+  ],
+  sentRequests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'requests' 
+    }
+  ],
+  receivedRequests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'requests' 
+    }
   ]
 },
 {
