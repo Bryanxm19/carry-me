@@ -4,7 +4,7 @@ import * as actions from '../../actions';
 import checkAuth from '../../utils/checkAuth';
 
 import ServiceInfo from './ServiceInfo';
-import ServiceRequests from './ServiceRequests';
+import ServiceStatus from './ServiceStatus';
 
 class ServicesShow extends Component {
 
@@ -14,6 +14,11 @@ class ServicesShow extends Component {
     this.props.fetchService(match.params.id, history)
   }
 
+  checkServiceOwnership() {
+    const { auth, service } = this.props
+    return service && auth._id === service.creator ? "owner" : "guest"
+  }
+
   renderServiceContent() {
     const { service } = this.props;
     return (
@@ -21,7 +26,7 @@ class ServicesShow extends Component {
         <div className="container" style={{ paddingTop: '50px', paddingBottom: '20px' }}>
           <div className="row">
             <ServiceInfo service={service} />
-            <ServiceRequests service={service} />
+            <ServiceStatus service={service} ownership={this.checkServiceOwnership()} />
           </div>
         </div>
       </div>
@@ -37,8 +42,8 @@ class ServicesShow extends Component {
   }
 }
 
-function mapStateToProps({ service }) {
-  return { service };
+function mapStateToProps({ service, auth }) {
+  return { service, auth };
 }
 
 export default connect(mapStateToProps, actions)(ServicesShow);
