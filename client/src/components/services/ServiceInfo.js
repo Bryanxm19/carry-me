@@ -8,6 +8,15 @@ class ServiceInfo extends Component {
     return service.type === "goals" ? "The Goal" : "Carry Being Offered"
   }
 
+  statusTextColor(status) {
+    switch (status) {
+      case "Accepting Requests":
+        return 'green'
+      default:
+        break
+    }
+  }
+
   render() {
     const { service } = this.props;
     return (
@@ -32,6 +41,9 @@ class ServiceInfo extends Component {
           </InfoFieldDiv>
           <InfoFieldDiv className="col-xs-12">
             <InfoFieldP>Price: <InfoFieldSpan>${ service && service.price }</InfoFieldSpan></InfoFieldP>
+          </InfoFieldDiv>
+          <InfoFieldDiv className="col-xs-12">
+            <InfoFieldP>Status: <InfoFieldSpan style={{ color: service && this.statusTextColor(service.status)}}>{ service && service.status }</InfoFieldSpan></InfoFieldP>
           </InfoFieldDiv>
         </div>
       </div>
