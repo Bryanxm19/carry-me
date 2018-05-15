@@ -30,7 +30,9 @@ passport.use(
     }
     else {
       const email = profile.emails[0].value
-      const user = await new User({ googleID: profile.id, email, username: email.split('@')[0] }).save();
+      var username = email.split('@')[0]
+      username = username.length <=15 ? username : username.substring(0,15)
+      const user = await new User({ googleID: profile.id, email, username }).save();
       done(null, user);
     }
   })
