@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as actions from '../../actions';
+
+import { RequestCarryButton, DisabledRequestButton } from '../styledComponents/Services';
 
 class StatusInfo extends Component {
+
+  handleRequestClick(service) {
+    const obj = this
+    obj.props.sendServiceRequest(service, obj.props.history)
+  }
 
   checkServiceType(service) {
     if (service.type === "goals") {
@@ -15,22 +23,28 @@ class StatusInfo extends Component {
   renderGoalInfo(service) {
     const { auth } = this.props
     var content
-    // check if user has merchant id
-    if (!auth) {
-      content = this.merchantSignUpMessage()
-    }
-    const id = service.requests.find(req => {
-      return auth.sentRequests.includes(req._id)
+    const request = service.requests.find(req => {
+      return req.requester._id === auth._id
     })
-
-    if (!id) {
-      console.log(auth.sentRequests)
-      content = this.sendRequestMessage()
+    if (service.status !== "Accepting Requests") {
+      content = <p style={{ fontSize: '16px', color: 'red' }}>I'm sorry, this goal is no longer accepting requests</p>
+    }
+    // check if user has merchant id
+    else if (!auth) {
+      content = this.merchantSignUpMessage()
+    } else if (!request) {
+      content = this.sendRequestMessage(service)
+    } else {
+      if (request.accepted) {
+        content = <p>Request Already Acepted</p>
+      } else {
+        content = this.requestSentMessage()
+      }
     }
 
     return (
       <div className="col-xs-12 text-center">
-        {content}
+        { content }
       </div>
     );
   }
@@ -39,8 +53,16 @@ class StatusInfo extends Component {
     return <p style={{ fontSize: '16px' }}>You must first sign up to become a carrier before helping people finish their goals. You can register in your <Link to="/settings">Settings Page</Link></p>
   }
 
-  sendRequestMessage() {
-    return <p style={{ fontSize: '16px' }}>Request to Carry</p>
+  sendRequestMessage(service) {
+    return (
+      <RequestCarryButton className="btn btn-lg" onClick={() => this.handleRequestClick(service)}>
+        Request to Carry
+      </RequestCarryButton>
+    )
+  }
+
+  requestSentMessage() {
+    return <DisabledRequestButton className="btn btn-lg" disabled>Request Sent</DisabledRequestButton>
   }
 
   render() {
@@ -53,4 +75,4 @@ function mapStateToProps({ auth }) {
   return { auth }
 }
 
-export default connect(mapStateToProps, null)(StatusInfo);
+export default connect(mapStateToProps, actions)(StatusInfo);
