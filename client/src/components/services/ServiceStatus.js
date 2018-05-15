@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import StatusInfo from './StatusInfo';
+import ServiceRequests from './ServiceRequests';
 
 class ServiceStatus extends Component {
 
@@ -9,11 +10,11 @@ class ServiceStatus extends Component {
   }
 
   renderContent() {
-    const { service, ownership } = this.props
+    const { service, ownership, history } = this.props
     if (service && ownership === "owner") {
-
+      return <ServiceRequests service={service} />
     } else if (service && ownership === "guest") {
-      return <StatusInfo service={service} />
+      return <StatusInfo service={service} history={history} />
     }
   }
 
