@@ -5,6 +5,7 @@ const requireLogin = require('../middlewares/requireLogin');
 
 const User = mongoose.model('users');
 const Service = mongoose.model('services');
+const Request = mongoose.model('requests');
 
 module.exports = app => {
   app.post('/api/lookup_games', requireLogin, (req, res) => {
@@ -66,12 +67,48 @@ module.exports = app => {
   });
 
   app.get('/api/services/:id', requireLogin, async (req, res) => {
-    const service = await Service.findById(req.params.id).populate('requests')
+    const service = await Service.findById(req.params.id).populate({ 
+      path: 'requests',
+      populate: {
+        path: 'requester',
+        model: 'users'
+      } 
+    })
 
     if (service) {
       res.status(200).send(service)
     } else {
       res.status(404).send('Service Not Found')
     }
+  });
+
+  app.put('/api/services/:id/request', requireLogin, async (req, res) => {
+    const service = await Service.findById(req.params.id)
+    const currentUser = await User.findById(req.user._id)
+    const request = new Request({ requester: currentUser, service })
+
+    request.save(err => {
+      if (err) {
+        console.log(err)
+        res.status(500).send('Unknown Server Error')
+      } else {
+        service.requests.push(request._id)
+        service.save()
+          .then(async service => {
+            const newService = await Service.findById(service._id).populate({ 
+              path: 'requests',
+              populate: {
+                path: 'requester',
+                model: 'users'
+              } 
+            })
+            res.status(200).send(newService)
+          })
+          .catch(err => {
+            console.log(err)
+            res.status(500).send('Unknown Server Error')
+          })
+      }
+    })
   });
 }
