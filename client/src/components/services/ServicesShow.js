@@ -20,13 +20,13 @@ class ServicesShow extends Component {
   }
 
   renderServiceContent() {
-    const { service } = this.props;
+    const { service, history } = this.props;
     return (
       <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
         <div className="container" style={{ paddingTop: '50px', paddingBottom: '20px' }}>
           <div className="row">
             <ServiceInfo service={service} />
-            <ServiceStatus service={service} ownership={this.checkServiceOwnership()} />
+            <ServiceStatus service={service} ownership={this.checkServiceOwnership()} history={history} />
           </div>
         </div>
       </div>
