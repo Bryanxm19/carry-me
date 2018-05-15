@@ -43,3 +43,29 @@ export const InfoFieldSpan = styled.span`
   margin-left: 3px;
   font-weight: normal;
 `
+
+export const RequestCarryButton = styled.button`
+  background-color: #314459;
+  border: none;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: white;
+  width: 70%;
+
+  &:hover {
+    color: white;
+    opacity: 0.9;
+  }
+`
+
+export const DisabledRequestButton = styled.button`
+  background-color: #314459;
+  opacity: 0.7;
+  color: white;
+  width: 70%;
+  margin-bottom: 10px;
+
+  &:hover {
+    color: white;
+  }
+`
