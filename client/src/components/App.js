@@ -20,8 +20,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path="/" component={Landing} />
           <Switch>
+            <Route exact path="/" component={Landing} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/services/new" component={ServicesNew} />
