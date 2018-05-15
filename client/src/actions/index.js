@@ -47,11 +47,22 @@ export const clearErrors = () => dispatch => {
 
 export const submitService = (values, history) => dispatch => {
   axios.post('/api/services', values)
-    .then(function(res) {
+    .then(res => {
       dispatch({ type: FETCH_USER, payload: res.data });
       history.push("/dashboard");
     })
-    .catch(function(error){
+    .catch(error => {
       dispatch({ type: FETCH_ERRORS, payload: error.response.data });
     });
+}
+
+export const sendServiceRequest = (service, history) => dispatch => {
+  axios.put('/api/services/' + service._id + '/request')
+    .then(res => {
+      dispatch({ type: FETCH_SERVICE, payload: res.data})
+      history.push("/services/" + service._id);
+    })
+    .catch(error => {
+      history.push("/404")
+    })
 }
