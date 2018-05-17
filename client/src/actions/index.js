@@ -69,7 +69,17 @@ export const sendServiceRequest = (service, history) => dispatch => {
 export const acceptServiceRequest = (request, history) => dispatch => {
   axios.put('/api/requests/' + request._id + '/accept')
     .then(res => {
-      dispatch({ type: FETCH_SERVICE, payload: res.data})
+      dispatch({ type: FETCH_SERVICE, payload: res.data })
+    })
+    .catch(error => {
+      history.push("/404")
+    })
+}
+
+export const declineServiceRequest = (request, history) => dispatch => {
+  axios.delete('/api/requests/' + request._id + '/decline')
+    .then(res => {
+      dispatch({ type: FETCH_SERVICE, payload: res.data })
     })
     .catch(error => {
       history.push("/404")
