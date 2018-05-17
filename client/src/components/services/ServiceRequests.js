@@ -13,7 +13,10 @@ class ServiceRequests extends Component {
   }
 
   renderGoalRequests(requests) {
-    if (requests.length) {
+    const pending = requests.filter(req => !req.accepted)
+    if (pending.length !== requests.length) {
+      return <p style={{ fontSize: '16px' }}>Goal In Progress</p>
+    } else if (pending.length) {
       return this.renderRequests(requests)
     } else {
       return <p style={{ fontSize: '16px' }}>Currently, this goal has no requests. You will be notified when someone requests to carry you.</p>
@@ -25,7 +28,7 @@ class ServiceRequests extends Component {
       if (!req.accepted) {
         return (
           <div className="col-md-6" key={i} style={{ padding: '5px' }}>
-            <ServiceRequest request={req} />
+            <ServiceRequest request={req} history={this.props.history} />
           </div>
         )
       }
