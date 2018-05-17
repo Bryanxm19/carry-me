@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import { Glyphicon } from 'react-bootstrap';
 
 class ServiceRequest extends Component {
+
+  handleRequestAccept() {
+    const { request, history, acceptServiceRequest } = this.props
+
+    acceptServiceRequest(request, history)
+  }
+
   render() {
     const { request } = this.props
     return (
@@ -10,14 +19,18 @@ class ServiceRequest extends Component {
           <p style={{ fontSize: '14px' }}><b>{request.requester.username}</b></p>
         </div>
         <div className="col-xs-2 text-left" style={{ paddingLeft: '5px' }}>
-          <Glyphicon glyph="ok" />
+          <button onClick={this.handleRequestAccept.bind(this)}>
+            <Glyphicon glyph="ok" />
+          </button>
         </div>
         <div className="col-xs-2 text-left" style={{ padding: 0 }}>
-          <Glyphicon glyph="remove" />
+          <button>
+            <Glyphicon glyph="remove" />
+          </button>
         </div>
       </div>
     );
   }
 }
 
-export default ServiceRequest;
+export default connect(null, actions)(ServiceRequest);
