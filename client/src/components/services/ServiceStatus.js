@@ -12,7 +12,7 @@ class ServiceStatus extends Component {
   renderContent() {
     const { service, ownership, history } = this.props
     if (service && ownership === "owner") {
-      return <ServiceRequests service={service} />
+      return <ServiceRequests service={service} history={history} />
     } else if (service && ownership === "guest") {
       return <StatusInfo service={service} history={history} />
     }
