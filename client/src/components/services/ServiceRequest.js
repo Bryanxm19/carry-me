@@ -11,6 +11,12 @@ class ServiceRequest extends Component {
     acceptServiceRequest(request, history)
   }
 
+  handleRequestDecline() {
+    const { request, history, declineServiceRequest } = this.props
+
+    declineServiceRequest(request, history)
+  }
+
   render() {
     const { request } = this.props
     return (
@@ -24,7 +30,7 @@ class ServiceRequest extends Component {
           </button>
         </div>
         <div className="col-xs-2 text-left" style={{ padding: 0 }}>
-          <button>
+          <button onClick={this.handleRequestDecline.bind(this)}>
             <Glyphicon glyph="remove" />
           </button>
         </div>
