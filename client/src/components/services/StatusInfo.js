@@ -26,7 +26,15 @@ class StatusInfo extends Component {
     const request = service.requests.find(req => {
       return req.requester._id === auth._id
     })
-    if (service.status !== "Accepting Requests") {
+    
+    if (request) {
+      if (request.accepted) {
+        content = <p>Request Already Acepted</p>
+      } else {
+        content = this.requestSentMessage()
+      }
+    }
+    else if (service.status !== "Accepting Requests") {
       content = <p style={{ fontSize: '16px', color: 'red' }}>I'm sorry, this goal is no longer accepting requests</p>
     }
     // check if user has merchant id
@@ -34,12 +42,6 @@ class StatusInfo extends Component {
       content = this.merchantSignUpMessage()
     } else if (!request) {
       content = this.sendRequestMessage(service)
-    } else {
-      if (request.accepted) {
-        content = <p>Request Already Acepted</p>
-      } else {
-        content = this.requestSentMessage()
-      }
     }
 
     return (
