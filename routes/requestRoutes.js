@@ -7,7 +7,7 @@ const Request = mongoose.model('requests');
 
 module.exports = app => {
 
-  app.put('/api/requests/:id/accept', requireLogin, (req, res) => {
+  app.put('/api/requests/:id/accept', [requireLogin, checkServiceOwnership], (req, res) => {
     Request.findByIdAndUpdate(req.params.id, { accepted: true }, { new: true })
       .then(async request => {
         const service = await Service.findById(request.service).populate({ 
@@ -34,7 +34,7 @@ module.exports = app => {
       })
   });
 
-  app.delete('/api/requests/:id/decline', requireLogin, (req, res) => {
+  app.delete('/api/requests/:id/decline', [requireLogin, checkServiceOwnership], (req, res) => {
     Request.findByIdAndRemove(req.params.id)
       .then(async request => {
         const service = await Service.findById(request.service).populate({ 
