@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
+import ServiceMessages from './ServiceMessages';
 
 import { RequestCarryButton, DisabledRequestButton } from '../styledComponents/Services';
 
@@ -29,7 +30,7 @@ class StatusInfo extends Component {
     
     if (request) {
       if (request.accepted) {
-        content = <p>Request Already Acepted</p>
+        content = <ServiceMessages owner={false} request={request} />
       } else {
         content = this.requestSentMessage()
       }
