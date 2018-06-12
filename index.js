@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const socket = require('socket.io');
 const keys = require('./config/keys');
 require('./models/user');
 require('./models/service');
 require('./models/request');
+require('./models/message');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
@@ -40,4 +42,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+const server = app.listen(PORT);
+
+const io = socket(server);
+
+io.on('connection', (socket) => {
+  socket.on('SEND_MESSAGE', function(data){
+    io.emit('RECEIVE_MESSAGE', data);
+  })
+});
