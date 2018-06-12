@@ -13,7 +13,13 @@ const requestSchema = new Schema({
   service: {
     type: Schema.Types.ObjectId,
     ref: 'services' 
-  }
+  },
+  messages: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'messages' 
+    }
+  ],
 },
 {
   timestamps: true
