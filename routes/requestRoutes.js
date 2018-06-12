@@ -4,6 +4,7 @@ const requireLogin = require('../middlewares/requireLogin');
 const checkServiceOwnership = require('../middlewares/checkServiceOwnership');
 const Service = mongoose.model('services');
 const Request = mongoose.model('requests');
+const Message = mongoose.model('messages');
 
 module.exports = app => {
 
@@ -54,5 +55,50 @@ module.exports = app => {
         res.status(500).send('Unknown Server Error')
       })
   });
+
+  app.get('/api/requests/:id/messages', requireLogin, (req, res) => {
+    Request
+      .findById(req.params.id)
+      .populate({ 
+        path: 'messages',
+        populate: {
+          path: 'user',
+          model: 'users'
+        } 
+      })
+      .exec((err, request) => {
+        if (err) {
+          console.log(err)
+          res.status(500).send('Unknown Server Error')
+        } else {
+          res.status(200).send({ messages: request.messages })
+        }
+      })
+  })
+
+  app.post('/api/requests/:id/message', requireLogin, async (req, res) => {
+    const params = req.body
+    const request = await Request.findById(req.params.id)
+    params.request = request
+    params.user = req.user
+
+    let message = new Message(params)
+    message.save(err => {
+      if (err) {
+        console.log(err)
+        res.status(500).send('Unknown Server Error')
+      } else {
+        request.messages.push(message._id)
+        request.save()
+          .then(request => {
+            res.status(200).send({ messages: request.messages })
+          })
+          .catch(err => {
+            console.log(err)
+            res.status(500).send('Unknown Server Error')
+          })
+      }
+    })
+  })
 
 }
