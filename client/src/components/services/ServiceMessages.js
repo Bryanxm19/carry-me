@@ -15,7 +15,7 @@ class ServiceMessages extends Component {
       message: '',
       messages: this.props.messages
     };
-    this.socket = io('http://carry-me-dev.herokuapp.com/');
+    this.socket = io('https://carry-me-dev.herokuapp.com/');
 
     this.socket.on('RECEIVE_MESSAGE', (data) => {
       sendMessage(data)
