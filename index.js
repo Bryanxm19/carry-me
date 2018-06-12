@@ -47,7 +47,9 @@ const server = app.listen(PORT);
 const io = socket(server);
 
 io.on('connection', (socket) => {
-  socket.on('SEND_MESSAGE', function(data){
-    io.emit('RECEIVE_MESSAGE', data);
+  socket.on('SEND_MESSAGE', (data) => {
+    socket.broadcast.emit('RECEIVE_MESSAGE', data);
   })
+
+  socket.on("disconnect", () => console.log("Client disconnected"));
 });
