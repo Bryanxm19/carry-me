@@ -3,6 +3,7 @@ import {
   FETCH_USER,
   FETCH_USER_GOALS,
   FETCH_SERVICE,
+  FETCH_MESSAGES,
   FETCH_ERRORS,
   CLEAR_ERRORS 
 } from './types';
@@ -84,4 +85,24 @@ export const declineServiceRequest = (request, history) => dispatch => {
     .catch(error => {
       history.push("/404")
     })
+}
+
+export const fetchMessages = (requestId) => dispatch => {
+  axios.get('/api/requests/' + requestId + '/messages')
+    .then(res => {
+      dispatch({ type: FETCH_MESSAGES, payload: res.data })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+export const sendMessage = (requestId, values) => dispatch => {
+  axios.post('/api/requests/' + requestId + '/message', values)
+    .then(res => {
+      dispatch({ type: FETCH_MESSAGES, payload: res.data });
+    })
+    .catch(error => {
+      console.log(error)
+    });
 }
