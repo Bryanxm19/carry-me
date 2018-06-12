@@ -71,19 +71,15 @@ module.exports = app => {
           console.log(err)
           res.status(500).send('Unknown Server Error')
         } else {
-          res.status(200).send({ messages: request.messages })
+          res.status(200).send(request.messages)
         }
       })
   })
 
   app.post('/api/requests/:id/message', requireLogin, async (req, res) => {
-    const params = req.body
     const request = await Request.findById(req.params.id)
-    params.request = request
-    params.user = req.user
-
-    let message = new Message(params)
-    message.save(err => {
+    var message = new Message(req.body)
+    message.save(async err => {
       if (err) {
         console.log(err)
         res.status(500).send('Unknown Server Error')
@@ -91,7 +87,23 @@ module.exports = app => {
         request.messages.push(message._id)
         request.save()
           .then(request => {
-            res.status(200).send({ messages: request.messages })
+            Request
+              .findById(request._id)
+              .populate({ 
+                path: 'messages',
+                populate: {
+                  path: 'user',
+                  model: 'users'
+                } 
+              })
+              .exec((err, request) => {
+                if (err) {
+                  console.log(err)
+                  res.status(500).send('Unknown Server Error')
+                } else {
+                  res.status(200).send(request.messages)
+                }
+              })
           })
           .catch(err => {
             console.log(err)
