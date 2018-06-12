@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ServiceRequest from './ServiceRequest';
+import ServiceMessages from './ServiceMessages';
 
 class ServiceRequests extends Component {
 
@@ -15,7 +16,7 @@ class ServiceRequests extends Component {
   renderGoalRequests(requests) {
     const pending = requests.filter(req => !req.accepted)
     if (pending.length !== requests.length) {
-      return <p style={{ fontSize: '16px' }}>Goal In Progress</p>
+      return <ServiceMessages owner={true} request={requests.filter(req => req.accepted)[0]} />
     } else if (pending.length) {
       return this.renderRequests(requests)
     } else {
