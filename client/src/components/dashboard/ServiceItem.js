@@ -25,7 +25,7 @@ class ServiceItem extends Component {
     const { service } = this.props;
     return (
       <Link to={"/services/" + service._id}>
-        <div className="col-xs-4 col-md-6" style={{ marginTop: '10px' }}>
+        <div className="col-xs-6 col-sm-4 col-md-6" style={{ marginTop: '10px' }}>
           <ITEM className="thumbnail" style={{ backgroundImage: `url(${service.imageURL})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', overflow: 'hidden', height: '150px' }} onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}>
             {this.renderContent()}
           </ITEM>
