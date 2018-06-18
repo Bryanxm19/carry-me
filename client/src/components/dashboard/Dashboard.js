@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import checkAuth from '../../utils/checkAuth';
+import { ContainerDiv } from '../styledComponents/Dashboard';
 
 import CarriesContainer from './CarriesContainer';
 
@@ -14,9 +15,9 @@ class Dashboard extends Component {
   renderDashboardContent() {
     return (
       <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
-        <div className="container" style={{ paddingTop: '50px' }}>
+        <ContainerDiv className="container" style={{ paddingTop: '50px' }}>
           <CarriesContainer {...this.props} />
-        </div>
+        </ContainerDiv>
       </div>
     );
   }
