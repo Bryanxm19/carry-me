@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 import io from "socket.io-client";
 
 import ServiceMessage from './ServiceMessage';
+import StatusMessage from './StatusMessage';
 
 class ServiceMessages extends Component {
 
@@ -71,7 +72,10 @@ class ServiceMessages extends Component {
   render() {
     return(
       <div className="row">
-        <div id="message-list" style={{ overflowY: 'scroll', maxHeight: '300px', borderBottom: '2px solid #314459', paddingBottom: '10px' }}>
+        <div className="col-xs-12">
+          <StatusMessage { ...this.props } />
+        </div>
+        <div id="message-list" className="col-xs-12" style={{ overflowY: 'scroll', maxHeight: '300px', borderBottom: '2px solid #314459', paddingBottom: '10px', marginTop: '10px' }}>
           {this.props.messages && this.renderMessages()}
         </div>
         <div className="col-xs-9 text-left" style={{ padding: '0', height: '50px', fontSize: '16px' }}>
@@ -85,8 +89,8 @@ class ServiceMessages extends Component {
   }
 }
 
-function mapStateToProps({ messages, auth }) {
-  return { messages, auth }
+function mapStateToProps({ messages, auth, service }) {
+  return { messages, auth, service }
 }
 
 export default connect(mapStateToProps, actions)(ServiceMessages);
