@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const keys = require('../config/keys');
+const stripe = require('stripe')(keys.stripeSKey);
 
 const requireLogin = require('../middlewares/requireLogin');
 const checkServiceOwnership = require('../middlewares/checkServiceOwnership');
@@ -111,6 +113,36 @@ module.exports = app => {
           })
       }
     })
+  })
+
+  app.put('/api/requests/:id/pay', requireLogin, async (req, res) => {
+    const request = await Request.findById(req.params.id)
+    const service = await Service.findById(request.service)
+    const charge = await stripe.charges.create({
+      amount: service.price * 100,
+      currency: 'usd',
+      source: req.body.id
+    })
+
+    request.chargeId = charge.id
+    await request.save()
+    Service
+      .findById(service._id)
+      .populate({ 
+        path: 'requests',
+        populate: {
+          path: 'requester',
+          model: 'users'
+        } 
+      })
+      .exec((err, service) => {
+        if (err) {
+          console.log(err)
+          res.status(500).send('Unknown Server Error')
+        } else {
+          res.status(200).send(service)
+        }
+      })
   })
 
 }
