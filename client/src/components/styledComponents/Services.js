@@ -31,6 +31,12 @@ export const ITEM = styled.div`
   }
 `
 
+export const ItemDiv = styled.div`
+  @media (max-width: 500px) {
+    width: 50%;
+  }
+`
+
 export const InfoFieldDiv = styled.div`
   font-size: 18px;
 `
