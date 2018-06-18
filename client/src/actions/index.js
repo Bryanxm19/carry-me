@@ -106,3 +106,13 @@ export const sendMessage = (requestId, values) => dispatch => {
       console.log(error)
     });
 }
+
+export const handleStripeToken = (requestId, token) => dispatch => {
+  axios.put('/api/requests/' + requestId + '/pay', token)
+    .then(res => {
+      dispatch({ type: FETCH_SERVICE, payload: res.data })
+    })
+    .catch(error => {
+      console.log(error)
+    });
+}
