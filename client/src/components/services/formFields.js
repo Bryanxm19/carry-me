@@ -5,5 +5,5 @@ export default [
   { label: 'Game (PC/PS4/XONE)', name: 'game', placeholder: '' },
   { label: 'Platform', name: 'platform', placeholder: '' },
   { label: '', name: 'imageURL', placeholder: '' },
-  { label: 'Price', name: 'price', placeholder: '' }
+  { label: 'Price (USD)', name: 'price', placeholder: '' }
 ];
