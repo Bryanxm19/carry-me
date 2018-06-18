@@ -6,6 +6,10 @@ const requestSchema = new Schema({
     type: Boolean,
     default: false
   },
+  chargeId: {
+    type: String,
+    default: ""
+  },
   requester: {
     type: Schema.Types.ObjectId,
     ref: 'users' 
