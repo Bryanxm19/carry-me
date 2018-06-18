@@ -6,7 +6,8 @@ import ServiceRequests from './ServiceRequests';
 class ServiceStatus extends Component {
 
   renderHeaderText() {
-    return this.props.ownership === "owner" ? "Requests" : "Status"
+    const { ownership, service } = this.props
+    return ownership === "owner" && service.status === "Accepting Requests" ? "Requests" : "Status"
   }
 
   renderContent() {
