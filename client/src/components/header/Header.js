@@ -26,9 +26,6 @@ const Header = () => {
         </FORM>
         <Nav pullRight>
           <NAVITEM>
-            <Glyphicon glyph="envelope" />
-          </NAVITEM>
-          <NAVITEM>
             <Glyphicon glyph="bell" />
           </NAVITEM>
           <LinkContainer to="/settings" activeClassName="">
