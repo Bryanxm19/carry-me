@@ -7,9 +7,9 @@ class CarriesContainer extends Component {
     const { goals } = this.props
     return (
       <div className="row">
-        <ActiveServices type="Carries" services={[]} />
-        <div className="col-md-2"></div>
         <ActiveServices type="Goals" services={goals} />
+        <div className="col-md-2"></div>
+        <ActiveServices type="Carries" services={[]} />
       </div>
     );
   }
