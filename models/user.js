@@ -15,6 +15,10 @@ const userSchema = new Schema({
     maxlength: 15,
     required: true
   },
+  stripeID: {
+    type: String,
+    default: ""
+  },
   carries: [
     {
       type: Schema.Types.ObjectId,
