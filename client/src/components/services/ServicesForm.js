@@ -114,7 +114,7 @@ class ServicesForm extends Component {
   }
 }
 
-function validate(values) {
+function validate(values, props) {
   const errors = {};
 
   _.each(formFields, ({ name }) => {
@@ -127,6 +127,9 @@ function validate(values) {
     } else {
       if (name === 'price' && !(Number.isInteger(values[name] * 1))) {
         errors[name] = 'Price can only be USD (no decimals)'
+      }
+      if (name === 'type' && (!props.user.stripeID && values[name] === 'carries')) {
+        errors[name] = 'You must set up your Carrier Account first before carrying users (go to user settings)'
       }
     }
   });
