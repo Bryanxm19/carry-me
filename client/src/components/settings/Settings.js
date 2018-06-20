@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import checkAuth from '../../utils/checkAuth';
 
 import SettingsForm from './SettingsForm';
+import CarrierSection from './CarrierSection';
 
 class Settings extends Component {
 
@@ -12,6 +13,7 @@ class Settings extends Component {
       <div key="2" style={{ backgroundColor: '#314459', minHeight: '100vh', paddingTop: '50px' }}>
         <div className="container" style={{ paddingTop: '50px' }}>
           <SettingsForm initialValues={auth} history={history} />
+          <CarrierSection {...this.props} />
         </div>
       </div>
     );
