@@ -38,8 +38,7 @@ class StatusInfo extends Component {
     else if (service.status !== "Accepting Requests") {
       content = <p style={{ fontSize: '16px', color: 'red' }}>I'm sorry, this goal is no longer accepting requests</p>
     }
-    // check if user has merchant id
-    else if (!auth) {
+    else if (!auth.stripeID) {
       content = this.merchantSignUpMessage()
     } else if (!request) {
       content = this.sendRequestMessage(service)
