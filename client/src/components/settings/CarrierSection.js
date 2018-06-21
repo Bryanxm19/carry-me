@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { SectionDiv } from '../styledComponents/Settings';
+
 function checkConnectedToStripe(user) {
   let header, content, link
 
@@ -19,17 +21,17 @@ function checkConnectedToStripe(user) {
 function renderContent(header, content, link) {
   return (
     <div className="row text-center" style={{ marginTop: '30px' }}>
-      <div className="col-xs-offset-2 col-xs-8" style={{ backgroundColor: 'white', borderRadius: '.25rem' }}>
+      <SectionDiv className="col-xs-offset-2 col-xs-8">
         <h2>{header}</h2>
-      </div>
-      <div className="col-xs-offset-2 col-xs-8" style={{ backgroundColor: 'white', borderRadius: '.25rem', fontSize: '16px' }}>
+      </SectionDiv>
+      <SectionDiv className="col-xs-offset-2 col-xs-8" style={{ fontSize: '16px' }}>
         <p>{content}</p>
-      </div>
-      <div className="col-xs-offset-2 col-xs-8" style={{ backgroundColor: 'white', borderRadius: '.25rem', fontSize: '16px' }}>
+      </SectionDiv>
+      <SectionDiv className="col-xs-offset-2 col-xs-8" style={{ fontSize: '16px' }}>
         <button className="btn btn-primary btn-lg" style={{ marginBottom: '10px', backgroundColor: '#314459', border: 'none' }}>
           {link}
         </button>
-      </div>
+      </SectionDiv>
     </div>
   )
 }
