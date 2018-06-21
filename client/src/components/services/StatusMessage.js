@@ -3,15 +3,17 @@ import StripeCheckout from 'react-stripe-checkout';
 
 function renderMessage(props) {
   const { owner, request, service, handleStripeToken } = props
+  let message
   if (owner) {
     if (!request.chargeId) {
-      return notPaidOwnerMessage()
+      message = service.type === "goals" ? notPaidGuestMessage(service, request, handleStripeToken) : notPaidOwnerMessage()
     }
   } else {
     if (!request.chargeId) {
-      return notPaidGuestMessage(service, request, handleStripeToken)
+      message = service.type === "goals" ? notPaidOwnerMessage() : notPaidGuestMessage(service, request, handleStripeToken)
     }
   }
+  return message
 }
 
 function notPaidOwnerMessage() {
@@ -49,7 +51,6 @@ function notPaidGuestMessage(service, request, handleToken) {
 }
 
 const StatusMessage = (props) => {
-  console.log(props)
   return (
     <div className="row" style={{ borderBottom: '2px solid #314459', paddingBottom: '10px' }}>
       { renderMessage(props) }
